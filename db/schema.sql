@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS parktalk_db;
+CREATE DATABASE parktalk_db;
