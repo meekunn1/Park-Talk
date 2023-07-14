@@ -33,7 +33,7 @@ Review.init(
     {
         sequelize,
         timestamps: false,
-        freesTableName: true,
+        freezeTableName: true,
         underscored: true,
         modelName: 'review',
 

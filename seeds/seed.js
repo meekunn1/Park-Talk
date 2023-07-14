@@ -2,7 +2,7 @@ const seedParks = require('./parks-seeds');
 const seedUsers = require('./users-seeds');
 const seedReviews = require('./reviews-seeds');
 
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
 
 const seedAll = async () => {
     await sequelize.sync({ force: true });
