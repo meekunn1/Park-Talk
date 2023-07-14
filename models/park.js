@@ -1,5 +1,5 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
 
 class Park extends Model {}
 
@@ -11,9 +11,10 @@ Park.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        review_text: {
+        address: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
     },
     {
@@ -21,9 +22,9 @@ Park.init(
         timestamps: false,
         freesTableName: true,
         underscored: true,
-        modelName: 'review',
+        modelName: 'park',
 
     }
 );
 
-module.exports = Review;
+module.exports = Park;

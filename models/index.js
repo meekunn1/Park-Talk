@@ -1,5 +1,30 @@
-const Users = require('./users');
-const Parks = require('./parks');
-const Reviews = require('./reviews');
+const Users = require('./user');
+const Parks = require('./park');
+const Reviews = require('./review');
 
-module.exports = { Users, Parks, Reviews };
+Users.hasMany(Reviews, {
+    foreignKey: 'user_id',
+    onDelete: 'CASCADE'
+});
+
+Reviews.belongsTo(Users, {
+    foreignKey: 'user_id'
+});
+
+Parks.hasMany(Reviews, {
+    foreignKey: 'park_id',
+    onDelete: 'CASCADE'
+});
+
+Reviews.belongsTo(Parks, {
+    foreignKey: 'park_id'
+});
+
+
+
+module.exports = { 
+    Users, 
+    Parks, 
+    Reviews 
+};
+
