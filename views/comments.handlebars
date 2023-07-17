@@ -1,0 +1,39 @@
+<div class="row d-flex justify-content-center align-items-center" style="min-height: 65vh;">
+        <div class="col-md-6">
+          <h3>Add Comment</h3>
+          <form id="commentForm">
+            <div class="mb-3">
+              <label for="title" class="form-label">Title</label>
+              <input type="text" class="form-control" id="title">
+            </div>
+            <div class="mb-3">
+              <label for="facility" class="form-label">Facilities</label>
+              <select class="form-select" id="facility">
+                <option selected>Please select</option>
+                <option value="1">Baseball Field</option>
+                <option value="2">Soccer Field</option>
+                <option value="3">Basketball Court</option>
+                <option value="4">Playground</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div id="other-facility" class="mb-3 d-none">
+              <label for="other-facility-input" class="form-label">Other Category</label>
+              <input type="text" class="form-control" id="other-facility-input">
+            </div>
+          </form>
+        </div>
+  
+        <div class="col-md-6">
+          <h3>Comment</h3>
+          <textarea class="form-control" rows="6"></textarea>
+        </div>
+      </div>
+  
+      <div class="row mt-4">
+        <div class="col">
+          <button type="submit" class="btn btn-primary" id="submitBtn">Submit</button>
+          <button type="button" class="btn btn-secondary">Edit</button>
+        </div>
+      </div>
+    </div>
