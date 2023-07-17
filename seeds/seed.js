@@ -1,6 +1,8 @@
 const seedParks = require('./parks-seeds');
 const seedUsers = require('./users-seeds');
 const seedReviews = require('./reviews-seeds');
+const seedTags = require('./tags-seeds');
+const seedReviewTags = require('./reviewTags-seeds');
 
 const sequelize = require('../config/connection.js');
 
@@ -13,7 +15,10 @@ const seedAll = async () => {
     console.log(`user table have been seeded.`);
     await seedReviews();
     console.log(`review table have been seeded.`);
-
+    await seedTags();
+    console.log(`tag table have been seeded.`);
+    await seedReviewTags();
+    console.log('review_tag table have been seeded.');
     process.exit(0);
 };
 

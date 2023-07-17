@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
-const sequelize = require('../config/connection');
+const sequelize = require('../config/connection.js');
 
-class Review extends Model {}
+class ReviewTag extends Model {}
 
-Review.init(
+ReviewTag.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,25 +11,18 @@ Review.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        title: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        review_text: {
-            type: DataTypes.STRING,
-            allowNull: false,
-        },
-        user_id: {
+        review_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'user',
+                model: 'review',
                 key: 'id',
             },
         },
-        park_id: {
+        tag_id: {
             type: DataTypes.INTEGER,
+            allowNull: false,
             references: {
-                model: 'park',
+                model: 'tag',
                 key: 'id',
             },
         },
@@ -40,9 +33,11 @@ Review.init(
         timestamps: false,
         freezeTableName: true,
         underscored: true,
-        modelName: 'review',
+        modelName: 'review_tag',
 
     }
 );
 
-module.exports = Review;
+module.exports = ReviewTag;
+
+//this is just a connector. does not need CRUD routes.
