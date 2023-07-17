@@ -39,3 +39,5 @@ ReviewTag.init(
 );
 
 module.exports = ReviewTag;
+
+//this is just a connector. does not need CRUD routes.
