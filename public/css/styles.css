@@ -1,5 +1,12 @@
-header, .park:not(:last-child) {
-    border-bottom: 1px solid #ccc;
+
+/*
+font-family: 'Montserrat', sans-serif;
+font-family: 'Rock Salt', cursive;
+font-family: 'Teko', sans-serif;
+*/
+
+.app-background {
+  background-image: url("/public/images/christian-chen-park-view.jpg");
 }
 
 .no-button {
@@ -15,4 +22,11 @@ header, .park:not(:last-child) {
   .no-button:hover {
     color: #065b83;
     text-decoration: underline;
+  }
+
+  @media (max-width: 576px) {
+    .navbar-nav {
+      padding-top: 0.5rem;
+      flex-direction: row;
+    }
   }
