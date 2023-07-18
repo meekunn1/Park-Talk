@@ -6,9 +6,6 @@ const apiRoutes = require('./api');
 //api routes
 router.use('/api', apiRoutes);
 
-router.use((req, res) => {
-  res.send("<h1>Route does not exist.</h1>")
-});
 //added by Keiji end.
 
 // const apiRoutes = require('./api');
