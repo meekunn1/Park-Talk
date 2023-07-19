@@ -44,7 +44,7 @@ User.init(
             },
             beforeUpdate: async (updateUserData) => {
                 updateUserData.password = await bcrypt.hash(updateUserData.password, 10);
-                return upddateUserData;
+                return updateUserData;
             },
         },
         //freezeTableName: true makes it so table name will not have 's' at the end.

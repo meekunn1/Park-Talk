@@ -15,7 +15,11 @@ Review.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        review_text: {
+        facility: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        comment: {
             type: DataTypes.STRING,
             allowNull: false,
         },
