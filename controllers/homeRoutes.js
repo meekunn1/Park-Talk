@@ -19,7 +19,7 @@ router.get('/profile', (req, res) => {
 
 router.get('/review', (req, res) => {
   const mapAPI = process.env.MAPS_API;
-  const mapLocation = 'Space+Needle,Seattle+WA';
+  const mapLocation = req.query.location;
   res.render('review', { mapAPI, mapLocation });
 });
 
