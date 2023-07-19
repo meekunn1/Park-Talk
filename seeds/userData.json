@@ -1,0 +1,17 @@
+[
+  {
+    "name": "anonymouse",
+    "email": "amouse@gmail.com",
+    "password": "secret123"
+  },
+  {
+    "name": "anonycat",
+    "email": "acat@gmail.com",
+    "password": "secret246"
+  },
+  {
+    "name": "anonydog",
+    "email": "adog@gmail.com",
+    "password": "secret135"
+  }
+]

@@ -1,0 +1,37 @@
+[
+    {
+        "title": "Sandbox",
+        "facility": "Playground",
+        "comment": "This park has sand box.",
+        "user_id": 1,
+        "park_id": 1
+    },
+    {
+        "title": "Cool Playground",
+        "facility": "Playground",
+        "comment": "There are lots of trees around the playground to hide from the sun.",
+        "user_id": 2,
+        "park_id": 1
+    },
+    {
+        "title": "Need maintenance",
+        "facility": "Playground",
+        "comment": "Playground was beat up.",
+        "user_id": 3,
+        "park_id": 1
+    },
+    {
+        "title": "Park with Large field",
+        "facility": "Soccer Field",
+        "comment": "My son loves to play soccer here.",
+        "user_id": 1,
+        "park_id": 2
+    },
+    {
+        "title": "Peaceful",
+        "facility": "General",
+        "comment": "Perfect for picnics.",
+        "user_id": 3,
+        "park_id": 2
+    }
+]
