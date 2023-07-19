@@ -15,16 +15,12 @@ router.post('/', async (req, res) => {
     });
   } catch (err) {
     res.status(400).json(err);
-    console.log('This Errored');
   }
 });
 
 router.post('/login', async (req, res) => {
   try {
     const userData = await User.findOne({ where: { email: req.body.email } });
-
-    console.log(userData);
-    console.log('this ran');
 
     if (!userData) {
       res
@@ -50,6 +46,7 @@ router.post('/login', async (req, res) => {
     });
 
   } catch (err) {
+    console.log('Login Error');
     res.status(400).json(err);
   }
 });
