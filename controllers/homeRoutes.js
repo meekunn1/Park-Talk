@@ -13,10 +13,6 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/profile', (req, res) => {
-  res.render('profile');
-});
-
 router.get('/review', (req, res) => {
   const mapAPI = process.env.MAPS_API;
   const mapLocation = req.query.location;
@@ -26,6 +22,5 @@ router.get('/review', (req, res) => {
 router.get('/comments', (req, res) => {
   res.render('comments');
 });
-
 
 module.exports = router;
