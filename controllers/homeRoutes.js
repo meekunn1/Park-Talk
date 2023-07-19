@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+require('dotenv').config();
 
 const router = express.Router();
 
@@ -15,5 +16,16 @@ router.get('/login', (req, res) => {
 router.get('/profile', (req, res) => {
   res.render('profile');
 });
+
+router.get('/review', (req, res) => {
+  const mapAPI = process.env.MAPS_API;
+  const mapLocation = 'Space+Needle,Seattle+WA';
+  res.render('review', { mapAPI, mapLocation });
+});
+
+router.get('/comments', (req, res) => {
+  res.render('comments');
+});
+
 
 module.exports = router;
