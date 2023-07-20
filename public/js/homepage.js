@@ -1,14 +1,23 @@
 const searchForm = document.getElementById('search-form');
 
-searchForm.addEventListener('submit', (event) => {
+searchForm.addEventListener('submit', async (event) => {
 	event.preventDefault();
 	const searchInput = document.getElementById('search-input').value;
 
-	// Build the URL with the search input as a query parameter
 	if (searchInput) {
-		const url = `/review?location=${searchInput}`;
+    // Send a POST request to the API endpoint
+    const response = await fetch('/api/park', {
+    method: 'POST',
+    body: JSON.stringify({ searchInput }),
+    headers: { 'Content-Type': 'application/json' },
+    });
 
-		// Redirect to the constructed URL
-		window.location.href = url;
+		if (response.ok) {
+			// If successful, redirect the browser to the reviews page
+      const url = `/review?location=${searchInput}`;
+      document.location.href = url;
+		} else {
+			alert(response.statusText);
+		}
 	}
 });

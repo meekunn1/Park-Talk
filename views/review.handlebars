@@ -1,7 +1,7 @@
 <div class="row d-flex justify-content-center">
   <div class="col-md-6 col-12">
     <div class="address-bar">
-      <input type="text" id="address-input" placeholder="Enter an address...">
+      <h2 class="card border-dark border-2 text-center" style="max-width: 24rem;" id="formattedAddress">{{mapLocation}}</h2>
     </div>
     <div>
       <iframe
@@ -19,33 +19,22 @@
   <div class="col-md-12 col-12 form-bg">
     <!-- Comment Button -->
     <div class="row justify-content-center">
-      <a class="btn btn-primary" href="/comments">Add Comment</a>
+      <button class="btn btn-primary" id="addCommentBtn">Add Comment</button>
     </div>
+    {{#if reviews.length}}
     <div class="row mt-2">
-      <!-- Three Separate Boxes (Columns) -->
+      {{#each reviews as |review|}}
       <div class="col-md-4 col-12">
         <div class="box">
           <!-- Content for the first box -->
-          <div class="username">Username 1</div>
-          <h3 class="post-title">Title of Post 1</h3>
-          <div class="comment">Comment 1 goes here...</div>
+          <div class="username">{{review.user.name}}</div>
+          <h3 class="post-title">{{review.title}}</h3>
+          <div class="comment">{{review.comment}}</div>
         </div>
       </div>
-      <div class="col-md-4 col-12">
-        <div class="box">
-          <!-- Content for the second box -->
-          <div class="username">Username 2</div>
-          <h3 class="post-title">Title of Post 2</h3>
-          <div class="comment">Comment 2 goes here...</div>
-        </div>
-      </div>
-      <div class="col-md-4 col-12">
-        <div class="box">
-          <!-- Content for the third box -->
-          <div class="username">Username 3</div>
-          <h3 class="post-title">Title of Post 3</h3>
-          <div class="comment">Comment 3 goes here...</div>
-        </div>
-      </div>
+      {{/each}}
     </div>
+    {{/if}}
   </div>
+
+  <script src="./js/review.js"></script>

@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const withAuth = require('../utils/auth');
-const axios = require('axios');
-require('dotenv').config();
+const { User, Review } = require('../models');
+const { getMapLocation, getParkData } = require('../utils/helpers');
 
 const router = express.Router();
 
@@ -23,7 +23,6 @@ router.get('/login', (req, res) => {
 
 router.get('/review', async (req, res) => {
   const mapAPI = process.env.MAPS_API;
-  // The user submitted address before it has been passed to the geocode API
   const inputLocation = req.query.location;
   let logged_in = false;
 
@@ -32,21 +31,33 @@ router.get('/review', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${inputLocation}}&key=${mapAPI}`);
-    // Returns the fully formatted address translated from inputLocation
-    const mapLocation = response.data.results[0].formatted_address;
+    const mapLocation = await getMapLocation(inputLocation, mapAPI);
+    const parkData = await getParkData(mapLocation);
 
-    console.log(mapLocation);
+    // Assuming you have models for Review and User defined
+    const reviewData = await Review.findAll({
+      where: {
+        park_id: parkData.id
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
 
-    res.render('review', { mapAPI, mapLocation, logged_in });
+    const reviews = reviewData.map((review) => review.get({ plain: true }));
+    res.render('review', { logged_in, mapAPI, mapLocation, reviews });
   } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching data from Google Maps API.');
+    res.status(500).send('Error fetching data from Google Maps API (homeRoutes). Return to the homepage and try again.');
   }
 });
 
-router.get('/comments', withAuth, (req, res) => {
-  res.render('comments', { logged_in: true });
+router.get('/comments', withAuth, async (req, res) => {
+  const mapLocation = req.query.location;
+
+  res.render('comments', { logged_in: true, mapLocation });
 });
 
 module.exports = router;

@@ -1,6 +1,12 @@
 const router = require('express').Router();
 const { User } = require('../../models');
 
+// Get user ID from session cookie
+router.get('/', async (req, res) => {
+  const user = req.session.user_id;
+  res.status(200).json(user);
+});
+
 router.post('/', async (req, res) => {
   try {
     const userData = await User.create(req.body);
