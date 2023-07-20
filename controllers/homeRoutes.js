@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const withAuth = require('../utils/auth');
+const { Park } = require('../models');
 const axios = require('axios');
-require('dotenv').config();
 
 const router = express.Router();
 
@@ -33,15 +33,12 @@ router.get('/review', async (req, res) => {
 
   try {
     const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${inputLocation}}&key=${mapAPI}`);
-    // Returns the fully formatted address translated from inputLocation
     const mapLocation = response.data.results[0].formatted_address;
-
-    console.log(mapLocation);
-
-    res.render('review', { mapAPI, mapLocation, logged_in });
-  } catch (error) {
-    console.error(error);
-    res.status(500).send('Error fetching data from Google Maps API.');
+  
+    res.render('review', { logged_in, mapAPI, mapLocation });
+  }
+  catch (err) {
+    res.status(500).send('Error fetching data from Google Maps API (homeRoutes). Return to the homepage and try again.');
   }
 });
 
