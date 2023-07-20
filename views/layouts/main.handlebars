@@ -13,34 +13,31 @@
   <link rel="stylesheet" href="./css/jass.css">
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
+<body class="app-background">
+  <nav class="navbar navbar-expand-md navbar-light border-bottom border-dark border-2">
     <div class="d-flex justify-content-between align-items-center w-100">
-      <a class="navbar-brand" href="/">
-        <span role="img" aria-label="deciduous tree">🌳</span>
-        Park Talk
-      </a>
+      <a class="navbar-brand no-button px-4" href="/">Park Talk</a>
       <ul class="navbar-nav ml-auto flex-row">
         {{#if logged_in}}
           <li class="nav-item">
-            <button class="btn btn-link nav-link" id="logout">Logout</button>
+            <button class="btn btn-link nav-link btn-text" id="logout">Logout</button>
           </li>
         {{else}}
           <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
+            <a class="nav-link btn-log btn-text" href="/login">Login</a>
           </li>
         {{/if}}
       </ul>
     </div>
   </nav>
-    <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
-      {{{ body }}}
-    </main>
-    <footer>
-      
-    </footer>
-  </div>
+  <main class="container container-fluid mt-5 d-flex justify-content-center align-items-center">
+    <!-- Render the sub layout -->
+    {{{ body }}}
+  </main>
+  <footer>
+    
+  </footer>
+</div>
 
   <!-- Render script for logged in users only -->
   {{#if logged_in}}
@@ -48,4 +45,5 @@
   {{/if}}
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+
 </html>

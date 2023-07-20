@@ -1,32 +1,194 @@
 
-/*
-font-family: 'Montserrat', sans-serif;
-font-family: 'Rock Salt', cursive;
-font-family: 'Teko', sans-serif;
-*/
+.navbar-brand, .welcome {
+  font-family: 'Rock Salt', cursive;
+}
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Teko', sans-serif;
+}
+
+.btn-text, p, span, a, li, td, input[type="text"], textarea {
+  font-family: 'Montserrat', sans-serif;
+}
+
+label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+.log-text {
+  font-family: 'Teko', sans-serif;
+  font-size: 3rem;
+}
+
+.container {
+  height: 80vh;
+  overflow-y:auto;
+}
 .app-background {
-  background-image: url("/public/images/christian-chen-park-view.jpg");
+  background-image: url("../images/christian-chen-park-view.jpg");
+  background-size: cover;
+}
+
+.navbar {
+  background-color:rgba(219, 213, 213, 0.8);
 }
 
 .no-button {
-    background: none;
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    color: #1b89bc;
-    text-decoration: none;
-    font-size: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-size: 30px;
+  text-decoration: none;
+  transition-duration: 0.4s;
+}
+  
+.no-button:hover {
+  text-decoration:underline;  
+}
+
+.btn-log {
+  font-size: 20px;
+  text-decoration: none;
+  color:black;
+}
+
+.btn-log:hover {
+  text-decoration: underline;
+}
+
+.form-bg {
+  background-color: rgba(219, 213, 213, 0.8);
+}
+
+.card {
+  background-color: rgba(219, 213, 213, 0.8);
+}
+
+.expanded-search-input {
+  width: 40rem;
+}
+
+.search-container {
+  margin-bottom: 10rem;
+}
+/*
+ * Always set the map height explicitly to define the size of the div element
+ * that contains the map. 
+ 
+#map {
+  height: 100%;
+}
+
+
+ * Optional: Makes the sample page fill the window. 
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+#description {
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+#infowindow-content .title {
+  font-weight: bold;
+}
+
+#infowindow-content {
+  display: none;
+}
+
+#map #infowindow-content {
+  display: inline;
+}
+
+.pac-card {
+  background-color: #fff;
+  border: 0;
+  border-radius: 2px;
+  box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.3);
+  margin: 10px;
+  padding: 0 0.5em;
+  font: 400 18px Roboto, Arial, sans-serif;
+  overflow: hidden;
+  font-family: Roboto;
+  padding: 0;
+}
+
+#pac-container {
+  padding-bottom: 12px;
+  margin-right: 12px;
+}
+
+.pac-controls {
+  display: inline-block;
+  padding: 5px 11px;
+}
+
+.pac-controls label {
+  font-family: Roboto;
+  font-size: 13px;
+  font-weight: 300;
+}
+
+#pac-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
+}
+
+#pac-input:focus {
+  border-color: #4d90fe;
+}
+
+
+#title {
+  color: #fff;
+  background-color: #4d90fe;
+  font-size: 25px;
+  font-weight: 500;
+  padding: 6px 12px;
+}
+
+
+#target {
+  width: 345px;
+}
+*/
+@media (max-width: 992px) {
+  .d-flex {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    max-height: 80vh; 
+    height: auto;
+    flex-shrink: 1;
   }
   
-  .no-button:hover {
-    color: #065b83;
-    text-decoration: underline;
-  }
+}
 
-  @media (max-width: 576px) {
-    .navbar-nav {
-      padding-top: 0.5rem;
-      flex-direction: row;
-    }
+@media (max-width: 576px) {
+  .navbar-nav {
+    padding-top: 0.5rem;
+    flex-direction: row;
   }
+  .container {
+    flex-shrink: 1;
+  }
+}
