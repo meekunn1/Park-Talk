@@ -84,11 +84,13 @@ label {
 }
 
 @media (max-width: 768px) {
-  .container {
-    max-height: 80vh; 
+  .container { 
     height:auto;
     padding-top: 3rem;
     flex-shrink: 1;
+  }
+  .su-form-spacing {
+    margin-top: 3rem;
   }
 }
 
