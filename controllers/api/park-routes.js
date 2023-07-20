@@ -1,6 +1,17 @@
 const router = require('express').Router();
 require('dotenv').config();
+const { Park } = require('../../models');
 const { getMapLocation, getParkData } = require('../../utils/helpers');
+
+router.get('/', async (req, res) => {
+  // find one park by its `id` value
+  try {
+    const parkData = await Park.findOne({ where: { address: req.query.location } });
+    res.status(200).json(parkData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
 // The `/api/park` endpoint
 router.post('/', async (req, res) => {
@@ -23,16 +34,6 @@ router.post('/', async (req, res) => {
 // router.get('/', async (req, res) => {
 //   try {
 //     const parkData = await Park.findAll();
-//     res.status(200).json(parkData);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// });
-
-// router.get('/:id', async (req, res) => {
-//   // find one park by its `id` value
-//   try {
-//     const parkData = await Park.findByPk(req.params.id);
 //     res.status(200).json(parkData);
 //   } catch (err) {
 //     res.status(500).json(err);

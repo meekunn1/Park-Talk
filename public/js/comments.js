@@ -1,45 +1,42 @@
-const facilityDropdown = document.getElementById('facility');
-const otherFacilityInput = document.getElementById('other-facility');
-
-categoryDropdown.addEventListener('change', function () {
-  if (this.value === 'other') {
-    otherCategoryInput.classList.remove('d-none');
-  } else {
-    otherCategoryInput.classList.add('d-none');
-  }
-});
-
 const submitBtn = document.getElementById('submitBtn');
 
-submitBtn.addEventListener('click', async function (event) {
-  event.preventDefault(); // Prevent form submission
+submitBtn.addEventListener('click', async (event) => {
+	event.preventDefault();
+  const address = document.getElementById('formattedAddress').innerHTML;
+	const title = document.getElementById('title').value;
+  // const facility = document.getElementById('facility').value;
+  const comment = document.getElementById('commentTextArea').value;
+  let userID = null;
+  let parkID = null;
+ await fetch('/api/user', {
+    method: 'GET'
+  }).then((response) => {
+    return (response.json());
+  }).then((data) => {
+    userID = (data);
+  });
+  await fetch(`/api/park?location=${address}`, {
+    method: 'GET'
+  }).then((response) => {
+    return (response.json());
+  }).then((data) => {
+    parkID = (data.id);
+  });
 
-  const titleInput = document.getElementById('title').value.trim();
-  const facilityInput = document.getElementById('facility').value.trim();
-  const otherFacilityInput = document.getElementById('other-facility-input').value.trim();
-  const commentInput = document.querySelector('textarea').value.trim();
-
-  if (titleInput && commentInput) {
-    let selectedFacility = facilityInput;
-    if (selectedFacility === 'other') {
-      selectedFacility = otherFacilityInput;
-    }
-
-    const formData = {
-      title: titleInput,
-      facility: selectedFacility,
-      comment: commentInput
-    };
-
-    const response = await fetch('/api/comments', {
-      method: 'POST',
-      body: JSON.stringify(formData),
-      headers: { 'Content-Type': 'application/json' },
+	if (title && comment && userID && parkID) {
+    // Send a POST request to the API endpoint
+    const response = await fetch('/api/review', {
+    method: 'POST',
+    body: JSON.stringify({ title, comment, userID, parkID }),
+    headers: { 'Content-Type': 'application/json' },
     });
-    if (response.ok) {
-      document.location.replace('/review');
-    } else {
-      alert(response.statusText);
-    }
-  }
+
+		if (response.ok) {
+			// If successful, redirect the browser to the reviews page
+      const url = `/review?location=${address}`;
+      document.location.href = url;
+		} else {
+			alert(response.statusText);
+		}
+	}
 });

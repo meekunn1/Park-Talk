@@ -31,8 +31,8 @@ router.get('/review', async (req, res) => {
   }
 
   try {
-    const mapLocation = await getMapLocation(inputLocation, mapAPI)
-    const parkData = await getParkData(mapLocation)
+    const mapLocation = await getMapLocation(inputLocation, mapAPI);
+    const parkData = await getParkData(mapLocation);
 
     // Assuming you have models for Review and User defined
     const reviewData = await Review.findAll({
@@ -54,8 +54,10 @@ router.get('/review', async (req, res) => {
   }
 });
 
-router.get('/comments', withAuth, (req, res) => {
-  res.render('comments', { logged_in: true });
+router.get('/comments', withAuth, async (req, res) => {
+  const mapLocation = req.query.location;
+
+  res.render('comments', { logged_in: true, mapLocation });
 });
 
 module.exports = router;

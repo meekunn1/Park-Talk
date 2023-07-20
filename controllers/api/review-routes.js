@@ -5,28 +5,22 @@ const { Park, Review, Tag, ReviewTag } = require('../../models');
 //need to add User and maybe session related contents.
 
 // create new review
-router.post('/', (req, res) => {
-// create a new review
-    Review.create(req.body)
-    .then((review) => {
-      //create pairings to bulk create in the reviewTag model
-      if (req.body.tagIds.length) {
-        const reviewTagIdArr = req.body.tagIds.map((tag_id) => {
-          return {
-            review_id: review.id,
-            tag_id,
-          };
-        });
-        return ReviewTag.bulkCreate(reviewTagIdArr);
-      }
-      // if no review tags, just respond
-      res.status(200).json(review);
-    })
-    .then((reviewTagIds) => res.status(200).json(reviewTagIds))
-    .catch((err) => {
-      console.log(err);
-      res.status(400).json(err);
+router.post('/', async (req, res) => {
+  try {
+    const reviewData = await Review.create({
+      title: req.body.title,
+      // facility: req.body.facility,
+      comment: req.body.comment,
+      user_id: req.body.userID,
+      park_id: req.body.parkID
     });
+
+    console.log(reviewData)
+
+    res.status(200).json(reviewData);
+  } catch (err) {
+    res.status(400).json(err);
+  }
 });
 
 // // get all Review
