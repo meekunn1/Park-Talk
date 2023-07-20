@@ -1,15 +1,16 @@
 const express = require('express');
 const path = require('path');
 const withAuth = require('../utils/auth');
+const axios = require('axios');
 require('dotenv').config();
 
 const router = express.Router();
 
 // Handle the root route
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
   let logged_in = false;
 
-  if(req.session.logged_in) {
+  if (req.session.logged_in) {
     logged_in = true;
   }
 
@@ -20,16 +21,28 @@ router.get('/login', (req, res) => {
   res.render('login');
 });
 
-router.get('/review', (req, res) => {
+router.get('/review', async (req, res) => {
   const mapAPI = process.env.MAPS_API;
-  const mapLocation = req.query.location;
+  // The user submitted address before it has been passed to the geocode API
+  const inputLocation = req.query.location;
   let logged_in = false;
 
-  if(req.session.logged_in) {
+  if (req.session.logged_in) {
     logged_in = true;
   }
 
-  res.render('review', { mapAPI, mapLocation, logged_in });
+  try {
+    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${inputLocation}}&key=${mapAPI}`);
+    // Returns the fully formatted address translated from inputLocation
+    const mapLocation = response.data.results[0].formatted_address;
+
+    console.log(mapLocation);
+
+    res.render('review', { mapAPI, mapLocation, logged_in });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Error fetching data from Google Maps API.');
+  }
 });
 
 router.get('/comments', withAuth, (req, res) => {
