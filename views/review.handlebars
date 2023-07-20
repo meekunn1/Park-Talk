@@ -1,9 +1,51 @@
-<iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  allowfullscreen
-  referrerpolicy="no-referrer-when-downgrade"
-  src="https://www.google.com/maps/embed/v1/place?key={{mapAPI}}&q={{mapLocation}}">
-</iframe>
+<div class="row d-flex justify-content-center">
+  <div class="col-md-6 col-12">
+    <div class="address-bar">
+      <input type="text" id="address-input" placeholder="Enter an address...">
+    </div>
+    <div>
+      <iframe
+        width="600"
+        height="450"
+        style="border:0"
+        loading="lazy"
+        allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps/embed/v1/place?key={{mapAPI}}&q={{mapLocation}}">
+      </iframe>
+    </div>
+  </div>
+  <div class="row mt-4 d-flex justify-content-center">
+  <div class="col-md-12 col-12 form-bg">
+    <!-- Comment Button -->
+    <div class="row justify-content-center">
+      <a class="btn btn-primary" href="/comments">Add Comment</a>
+    </div>
+    <div class="row mt-2">
+      <!-- Three Separate Boxes (Columns) -->
+      <div class="col-md-4 col-12">
+        <div class="box">
+          <!-- Content for the first box -->
+          <div class="username">Username 1</div>
+          <h3 class="post-title">Title of Post 1</h3>
+          <div class="comment">Comment 1 goes here...</div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="box">
+          <!-- Content for the second box -->
+          <div class="username">Username 2</div>
+          <h3 class="post-title">Title of Post 2</h3>
+          <div class="comment">Comment 2 goes here...</div>
+        </div>
+      </div>
+      <div class="col-md-4 col-12">
+        <div class="box">
+          <!-- Content for the third box -->
+          <div class="username">Username 3</div>
+          <h3 class="post-title">Title of Post 3</h3>
+          <div class="comment">Comment 3 goes here...</div>
+        </div>
+      </div>
+    </div>
+  </div>
