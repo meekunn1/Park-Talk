@@ -1,8 +1,8 @@
 const express = require('express');
 const path = require('path');
 const withAuth = require('../utils/auth');
-const { Park } = require('../models');
-const axios = require('axios');
+const { User, Review } = require('../models');
+const { getMapLocation, getParkData } = require('../utils/helpers');
 
 const router = express.Router();
 
@@ -23,7 +23,6 @@ router.get('/login', (req, res) => {
 
 router.get('/review', async (req, res) => {
   const mapAPI = process.env.MAPS_API;
-  // The user submitted address before it has been passed to the geocode API
   const inputLocation = req.query.location;
   let logged_in = false;
 
@@ -32,12 +31,25 @@ router.get('/review', async (req, res) => {
   }
 
   try {
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${inputLocation}}&key=${mapAPI}`);
-    const mapLocation = response.data.results[0].formatted_address;
-  
-    res.render('review', { logged_in, mapAPI, mapLocation });
-  }
-  catch (err) {
+    const mapLocation = await getMapLocation(inputLocation, mapAPI)
+    const parkData = await getParkData(mapLocation)
+
+    // Assuming you have models for Review and User defined
+    const reviewData = await Review.findAll({
+      where: {
+        park_id: parkData.id
+      },
+      include: [
+        {
+          model: User,
+          attributes: ['name'],
+        },
+      ],
+    });
+
+    const reviews = reviewData.map((review) => review.get({ plain: true }));
+    res.render('review', { logged_in, mapAPI, mapLocation, reviews });
+  } catch (error) {
     res.status(500).send('Error fetching data from Google Maps API (homeRoutes). Return to the homepage and try again.');
   }
 });

@@ -1,31 +1,17 @@
 const router = require('express').Router();
-const { response } = require('express');
-const { Park } = require('../../models');
-const axios = require('axios');
 require('dotenv').config();
+const { getMapLocation, getParkData } = require('../../utils/helpers');
 
 // The `/api/park` endpoint
 router.post('/', async (req, res) => {
   const mapAPI = process.env.MAPS_API;
-  // The user submitted address before it has been passed to the geocode API
   const inputLocation = req.body.searchInput;
 
   try {
-    const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?address=${inputLocation}}&key=${mapAPI}`);
-    // Returns the fully formatted address translated from inputLocation
-    const mapLocation = response.data.results[0].formatted_address;
-    const parkData = await Park.findOne({ where: { address: mapLocation } });
+    const mapLocation = await getMapLocation(inputLocation, mapAPI)
+    const parkData = await getParkData(mapLocation)
 
-    if (parkData === null) {
-      console.log('Creating New Park');
-
-      const newPark = await Park.create({
-        address: mapLocation
-      });
-
-      res.status(200).json(newPark);
-    } else {
-      console.log('Loading Existing Park');
+    if (parkData) {
       res.status(200).json(parkData);
     }
   } catch (error) {
