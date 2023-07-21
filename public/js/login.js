@@ -17,7 +17,7 @@ const loginFormHandler = async (event) => {
         // If successful, redirect the browser to the reviews page
         document.location.replace('/');
       } else {
-        alert(response.statusText);
+        alert("Incorrect email or password\nPlease try again");
       }
     }
 };
@@ -39,7 +39,7 @@ const signupFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/');
     } else {
-      alert(response.statusText);
+      alert("Invalid Input:\nPlease submit:\nName,\nEmail,\nPassword\n(Password must have at least one uppercase, lowercase, number, and special character)");
     }
   }
 };
