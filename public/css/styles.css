@@ -83,6 +83,13 @@ label {
   margin-bottom: 10rem;
 }
 
+.map-container {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  transition: width 2.0s ease;
+}
+
 @media (max-width: 768px) {
   .container { 
     height:auto;
@@ -91,6 +98,9 @@ label {
   }
   .su-form-spacing {
     margin-top: 3rem;
+  }
+  .map-container {
+    width: 80%;
   }
 }
 
