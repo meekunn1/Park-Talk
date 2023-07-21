@@ -60,4 +60,8 @@ router.get('/comments', withAuth, async (req, res) => {
   res.render('comments', { logged_in: true, mapLocation });
 });
 
+router.get('/*', (req, res) => {
+  res.redirect('/');
+});
+
 module.exports = router;
